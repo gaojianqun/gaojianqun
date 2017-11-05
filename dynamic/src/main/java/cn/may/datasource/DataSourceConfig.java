@@ -28,24 +28,30 @@ import java.util.Map;
 @EnableTransactionManagement
 public class DataSourceConfig {
 
+    /**
+     * 将application.properties文件中的驱动（driver-class-name）,url,username,password封装成实体
+     */
     @Bean
-    @ConfigurationProperties("datasource.db_a")
+    @ConfigurationProperties(prefix = "datasource.db_a")
     @Qualifier("dataSourceDefault")
     public DataSource dataSourceDefault(){
+        //生成一个Druid数据源（命名为dataSourceDefault）
         return new DruidDataSource();
     }
 
     @Bean
-    @ConfigurationProperties("datasource.db_b")
+    @ConfigurationProperties(prefix = "datasource.db_b")
     @Qualifier("dataSourceB")
     public DataSource dataSourceB(){
+        //生成一个Druid数据源（命名为dataSourceB）
         return new DruidDataSource();
     }
 
     @Bean
-    @ConfigurationProperties("dataSource.db_c")
+    @ConfigurationProperties(prefix = "datasource.db_c")
     @Qualifier("dataSourceC")
     public DataSource dataSourceC(){
+        //生成一个Druid数据源（命名为dataSourceC）
         return new DruidDataSource();
     }
 

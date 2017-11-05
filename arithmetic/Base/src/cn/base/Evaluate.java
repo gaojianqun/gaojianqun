@@ -1,6 +1,5 @@
 package cn.base;
 
-
 import java.util.Scanner;
 import java.util.Stack;
 
