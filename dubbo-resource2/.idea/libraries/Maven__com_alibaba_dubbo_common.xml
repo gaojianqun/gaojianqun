@@ -1,0 +1,15 @@
+<component name="libraryTable">
+  <library name="Maven: com.alibaba:dubbo-common">
+    <CLASSES>
+      <root url="jar://D:/mvnlib/com/alibaba/dubbo-common/dubbo-common-.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/com/alibaba/dubbo-common/dubbo-common--javadoc.jar!/" />
+      <root url="jar://D:/mvnlib/com/alibaba/dubbo-common/dubbo-common--javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/alibaba/dubbo-common/dubbo-common--sources.jar!/" />
+      <root url="jar://D:/mvnlib/com/alibaba/dubbo-common/dubbo-common--sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

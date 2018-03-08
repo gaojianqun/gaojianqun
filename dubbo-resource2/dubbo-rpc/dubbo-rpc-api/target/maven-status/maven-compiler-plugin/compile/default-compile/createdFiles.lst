@@ -1,0 +1,5 @@
+com\alibaba\dubbo\rpc\api\AbstractProtocol.class
+com\alibaba\dubbo\rpc\api\ProtocolFilterWrapper$1.class
+com\alibaba\dubbo\rpc\api\ProtocolListenerWrapper.class
+com\alibaba\dubbo\rpc\Protocol.class
+com\alibaba\dubbo\rpc\api\ProtocolFilterWrapper.class
