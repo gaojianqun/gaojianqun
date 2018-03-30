@@ -1,7 +1,5 @@
 package cn.base;
 
-import org.omg.CORBA.NO_IMPLEMENT;
-
 /**
  * Created by gaojianqun on 2017/11/5.
  * 链表

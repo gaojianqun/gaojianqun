@@ -30,7 +30,7 @@ public class Shell {
                     int temp = array[i];
                     //插入排序
                     for(int j = i-d;j >= 0 && array[j] > temp;j = j-d){
-                        //交换
+                        //交换----->思想：插入排序
                         int p = array[j+d];
                         array[j+d] = array[j];
                         array[j] = p;
