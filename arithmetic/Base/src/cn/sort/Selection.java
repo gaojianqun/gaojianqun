@@ -6,6 +6,7 @@ package cn.sort;
  * 选择排序
  * 比较次数：N的二次方/2
  * 交换次数：N
+ * 时间复杂度为O(n^2)
  */
 public class Selection {
     public static void main(String [] args){

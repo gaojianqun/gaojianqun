@@ -10,7 +10,7 @@ import java.util.Arrays;
  * 比较操作的次数介于(nlogn) / 2和nlogn - n + 1。
  * 赋值操作的次数是(2nlogn)。归并算法的空间复杂度为：0 (n)
  * 归并排序比较占用内存，但却是一种效率高且稳定的算法。
- *
+ * O(nlog n)
  */
 public class Merge {
 

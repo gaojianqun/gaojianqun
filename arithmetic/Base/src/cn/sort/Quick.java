@@ -1,9 +1,8 @@
 package cn.sort;
 
-import java.util.Date;
-
 /**
  * Created by gaojianqun on 2018/3/27.
+ * 时间复杂度为O(nlogn)
  * 第一趟排序
  * 5 1 2 7 9 3 4 6 10 8
  * 5 1 2 6 9 3 4 7 10 8
@@ -21,7 +20,15 @@ import java.util.Date;
  * 第四趟排序
  * 1 2 3 4 5 6 9 7 10 8
  * 第五趟排序
- * 。。。。。。
+ * 1 2 3 4 5 6 8 7 10 9
+ * 1 2 3 4 5 6 8 7 9 10
+ * 1 2 3 4 5 6 8 7 9 10
+ * 1 2 3 4 5 6 8 7 9 10
+ * 第六趟排序
+ * 1 2 3 4 5 6 7 8 9 10
+ * 1 2 3 4 5 6 7 8 9 10
+ * 第七趟排序
+ * 问题解决，排序结束
  */
 public class Quick {
 
@@ -30,9 +37,6 @@ public class Quick {
         int start = 0;
         int end = a.length-1;
         sort(a,start,end);
-        for(int i = 0;i < a.length;i++){
-            System.out.print(a[i]+" ");
-        }
     }
 
     //具体排序

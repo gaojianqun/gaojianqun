@@ -7,7 +7,7 @@ package cn.sort;
  * 比较次数：N的二次方/4
  * 交换次数：N的二次方/4
  * 最坏情况的比较次数和交换次数：N的二次方/2
- *
+ * 时间复杂度为O(n^2)
  */
 public class Insertion {
     public static void main(String [] args){
