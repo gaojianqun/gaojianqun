@@ -41,7 +41,7 @@ public class Quick {
 
     //具体排序
     public static void sort(int[] array,int s,int e){
-        //设置虚拟数字
+        //设置关键数字
         int start = s;
         int end = e;
         int key = array[s];

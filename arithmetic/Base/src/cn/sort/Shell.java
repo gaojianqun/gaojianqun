@@ -14,7 +14,8 @@ package cn.sort;
 public class Shell {
 
     public static void main(String [] args){
-        int[] array = new int[]{49,38,65,97,76,13,27,49,78,34,12,64,1};
+//        int[] array = new int[]{49,38,65,97,76,13,27,49,78,34,12,64,1};
+        int[] array = new int[]{6,8,10,12,13,1,5,7,9,2,4,3,11,14,20,22,19,18,16,17,23,24,25,15};
         sort(array);
     }
 
@@ -37,6 +38,10 @@ public class Shell {
                         array[j] = p;
                     }
                 }
+                for(int q = 0;q<array.length;q++){
+                    System.out.print(array[q]+" ");
+                }
+                System.out.println();
             }
 
             if(d==1){
@@ -48,6 +53,7 @@ public class Shell {
         for(int q = 0;q<array.length;q++){
             System.out.print(array[q]+" ");
         }
+        System.out.println();
     }
 
 }

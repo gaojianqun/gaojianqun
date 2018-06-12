@@ -16,12 +16,15 @@ public class Selection {
 
     public static void sort(int [] array){
         for(int i = 0; i < array.length;i ++){
-            int min = array[i];
-            for(int j = i + 1; j < array.length && array[j] > min; j++){
-                int p = array[j];
-                array[j] = min;
-                min = p;
+            int minIndex = i;
+            for(int j = i + 1; j < array.length; j++){
+                if(array[j] < array[minIndex]){
+                    minIndex = j;
+                }
             }
+            int temp = array[minIndex];
+            array[minIndex] = array[i];
+            array[i] = temp;
         }
 
         for(int i=0;i < array.length;i++){
