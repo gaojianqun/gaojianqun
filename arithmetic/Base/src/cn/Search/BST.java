@@ -35,9 +35,15 @@ public class BST<Key extends Comparable<Key>,Value>{
         }
     }
 
-    //树中节点的查找
+    /**
+     * 查找树中关键字为key的节点
+     * @param key
+     * @return
+     */
     public Value get(Key key){
         return get(root,key);
+//        较为高效
+//        return get1(root,key);
     }
 
     private Value get(Node node,Key key){
@@ -56,6 +62,25 @@ public class BST<Key extends Comparable<Key>,Value>{
                 return node.value;
             }
         }
+    }
+
+
+    /**
+     * 查找关键字的第二种写法
+     * 迭代版本较为高效
+     * @param node
+     * @param key
+     * @return
+     */
+    private Value get1(Node node,Key key){
+        while(node!=null && key !=node.key){
+            if(key.compareTo(node.key) < 0){
+                node = node.left;
+            }else if(key.compareTo(node.key) > 0){
+                node = node.right;
+            }
+        }
+        return node.value;
     }
 
 
@@ -88,9 +113,11 @@ public class BST<Key extends Comparable<Key>,Value>{
     //查找二叉树中的最小键
     public Key min(){
         return min(root).key;
+//        较为高效的迭代方法
+//        return min1(root).key;
     }
 
-    public Node min(Node node){
+    private Node min(Node node){
         if(node.left == null){
             return node;
         }else{
@@ -98,12 +125,21 @@ public class BST<Key extends Comparable<Key>,Value>{
         }
     }
 
+    private Node min1(Node node){
+        while(node!=null){
+            node = node.left;
+        }
+        return node;
+    }
+
     //查找二叉树中的最大键
     public Key max(){
         return max(root).key;
+//        较为高效的迭代写法
+//        return max1(root).key;
     }
 
-    public Node max(Node node){
+    private Node max(Node node){
         if(node.right == null){
             return node;
         }else{
@@ -111,5 +147,17 @@ public class BST<Key extends Comparable<Key>,Value>{
         }
     }
 
+
+    /**
+     * 较为高效的迭代方式
+     * @param node
+     * @return
+     */
+    private Node max1(Node node){
+        while (node!=null){
+            node = node.right;
+        }
+        return node;
+    }
 
 }

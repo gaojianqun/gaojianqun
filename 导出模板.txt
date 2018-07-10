@@ -1,0 +1,52 @@
+    /**
+     * <p>Discription:[下载模板功能]</p>
+     * @param response response对象
+     * @param request response对象
+     * @author:[全冉]
+     * 同时在resource目录下创建一个template文件夹，在该文件夹下有模板template.xls文件
+     */
+    @ApiOperation("下载模板")
+    @GetMapping("/downloadTemplate")
+    public void downloadTemplate(HttpServletResponse response, HttpServletRequest request) {
+        InputStream inputStream = null;
+        ServletOutputStream servletOutputStream = null;
+        try {
+            String filename = "个人客户档案模板.xls";
+            String path = "template/template.xls";
+            org.springframework.core.io.Resource resource = resourceLoader.getResource("classpath:"+path);
+            inputStream = resource.getInputStream();
+
+//            response.setContentType("application/vnd.ms-excel");
+            response.setContentType("UTF-8");
+            //设置弹出对话框
+            response.setContentType("application/octet-stream");
+            response.setHeader("Content-Disposition", "attachment; filename="+new String(filename.getBytes("UTF-8"),"ISO8859-1"));
+            response.addHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+            response.addHeader("charset", "utf-8");
+            response.addHeader("Pragma", "no-cache");
+            response.setHeader("Content-Length", String.valueOf(inputStream.available()));
+//            String encodeName = URLEncoder.encode(filename, StandardCharsets.UTF_8.toString());
+//            response.setHeader("Content-Disposition", "attachment; filename=\"" + encodeName + "\"; filename*=utf-8''" + encodeName);
+
+            servletOutputStream = response.getOutputStream();
+            IOUtils.copy(inputStream, servletOutputStream);
+            response.flushBuffer();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (servletOutputStream != null) {
+                    servletOutputStream.close();
+                    servletOutputStream = null;
+                }
+                if (inputStream != null) {
+                    inputStream.close();
+                    inputStream = null;
+                }
+                // 召唤jvm的垃圾回收器
+                System.gc();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }

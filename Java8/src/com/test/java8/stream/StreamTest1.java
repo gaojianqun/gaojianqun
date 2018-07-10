@@ -1,7 +1,8 @@
 package com.test.java8.stream;
 
-import java.util.ArrayList;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -11,7 +12,23 @@ import java.util.stream.Stream;
  */
 public class StreamTest1 {
 
-    public static void main(String[] args){
+    public static void main(String[] args) throws Exception{
+
+        Date date = new Date(1529942400000L); // 根据long类型的毫秒数生命一个date类型的时间
+        String sDateTime = new SimpleDateFormat("yyyyMMddHHmmss").format(date);
+
+        System.out.println(sDateTime);
+
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMddHHmmss");
+        Date dateTime = formatter.parse(sDateTime);
+        System.out.println(dateTime);
+
+        String str = "2018-07-04";
+        SimpleDateFormat formatter1 = new SimpleDateFormat("yyyy-MM-dd");
+        Date date1 = formatter1.parse(str);
+        System.out.println(date1.getTime());
+
+
         List<Integer> numbers = Arrays.asList(1,2,3,4,5,6);
         Stream<Integer> stream = numbers.stream();
 //        stream.filter((x) -> {
