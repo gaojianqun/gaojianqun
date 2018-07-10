@@ -18,6 +18,6 @@ public class HelloServiceImplHystrixFallBack implements HelloService{
 
     @Override
     public String hello1(@RequestParam( value="name") String name) {
-        return "error";
+        return "sorry error!";
     }
 }
