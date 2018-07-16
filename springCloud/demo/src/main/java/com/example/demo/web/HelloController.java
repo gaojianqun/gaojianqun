@@ -14,14 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class HelloController {
 
-    @Value("${name:info}")
-    String info;
-
-    @RequestMapping("/")
-    String info() {
-        return info;
-    }
-
     @GetMapping("/hello")
     public String index(){
        return "Hello World Gaojianqun";
