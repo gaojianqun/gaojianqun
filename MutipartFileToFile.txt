@@ -1,0 +1,66 @@
+	public void uploadFile(MultipartFile file){
+		CloseableHttpClient httpClient = HttpClients.createDefault();
+
+		try {
+			File f = null;
+			if(file.equals("")||file.getSize()<=0){
+				file = null;
+			}else{
+				InputStream ins = file.getInputStream();
+				f=new File(file.getOriginalFilename());
+				inputStreamToFile(ins, f);
+			}
+
+			// 要上传的文件的路径
+//			String filePath = "D:\\1.jpg";
+			// 把一个普通参数和文件上传给下面这个地址 是一个servlet
+			HttpPost httpPost = new HttpPost("http://172.28.50.59:8888/d/u");
+			// 把文件转换成流对象FileBody
+			FileBody bin = new FileBody(f);
+			// 普通字段 重新设置了编码方式
+			HttpEntity reqEntity = MultipartEntityBuilder.create().addPart("media", bin).build();
+			httpPost.setEntity(reqEntity);
+			System.out.println("发起请求的页面地址 " + httpPost.getRequestLine());
+			// 发起请求 并返回请求的响应
+			CloseableHttpResponse response = httpClient.execute(httpPost);
+			try {
+				System.out.println("----------------------------------------");
+				// 打印响应状态
+				System.out.println(response.getStatusLine());
+				// 获取响应对象
+				HttpEntity resEntity = response.getEntity();
+				if (resEntity != null) {
+					// 打印响应长度
+					System.out.println("Response content length: " + resEntity.getContentLength());
+					// 打印响应内容
+					System.out.println(EntityUtils.toString(resEntity, Charset.forName("UTF-8")));
+				}
+				// 销毁
+				File del = new File(f.toURI());
+				del.delete();
+				EntityUtils.consume(resEntity);
+				response.close();
+				httpClient.close();
+			} catch (Exception e){
+				e.printStackTrace();
+			}
+		} catch (Exception e){
+			e.printStackTrace();
+		}
+	}
+
+
+	public static void inputStreamToFile(InputStream ins,File file) {
+		try {
+			OutputStream os = new FileOutputStream(file);
+			int bytesRead = 0;
+			byte[] buffer = new byte[8192];
+			while ((bytesRead = ins.read(buffer, 0, 8192)) != -1) {
+				os.write(buffer, 0, bytesRead);
+			}
+			os.close();
+			ins.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}

@@ -14,6 +14,15 @@ public class StreamTest1 {
 
     public static void main(String[] args) throws Exception{
 
+        SimpleDateFormat formatter2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String publishTime = "2018-07-20 00:00:00";
+        Date dateTime2 = formatter2.parse(publishTime);
+        System.out.println(dateTime2);
+
+        Date date2 = new Date(System.currentTimeMillis()); // 根据long类型的毫秒数生命一个date类型的时间
+        String sDateTime1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(date2);
+        System.out.println(sDateTime1);
+
         Date date = new Date(1529942400000L); // 根据long类型的毫秒数生命一个date类型的时间
         String sDateTime = new SimpleDateFormat("yyyyMMddHHmmss").format(date);
 
