@@ -1,0 +1,52 @@
+@PostMapping(value = "/uploadFile")
+	@ApiOperation(value = "上传文件", httpMethod = "POST", notes = "上传文件")
+	public Response<FileVO> uploadExcel(@RequestHeader("accessToken") String accessToken,
+                                        @RequestParam(value="file",required = false)MultipartFile file){
+
+
+	 //导入数据
+         String r = contentService.readExcelFile(userId,file);
+
+}
+
+
+       /**
+	 * 上传文件
+	 * @param userId
+	 * @param file
+	 * @return
+	 */
+	public String readExcelFile(String userId, MultipartFile file){
+		String jsonStr = "";
+		String result ="";
+		StringBuilder builder = new StringBuilder();
+		List<CmsLibContent> cmsLibContents = new ArrayList<>();
+		//创建处理EXCEL的类
+		ReadExcel readExcel=new ReadExcel();
+		//解析excel，获取上传的事件单
+		jsonStr = readExcel.getExcelInfo(file);
+		if(jsonStr !=null && !"".equals(jsonStr) && !"文件格式不正确，请检查标题、正文字段是否为空".equals(jsonStr)){
+			cmsLibContents = JSON.parseArray(jsonStr,CmsLibContent.class);
+		}
+		//至此已经将excel中的数据转换到list里面了,接下来就可以操作list,可以进行保存到数据库,或者其他操作,
+		if(cmsLibContents != null && !cmsLibContents.isEmpty()){
+			cmsLibContents.stream().forEach(libContent->{
+				libContent.setCreater(Long.valueOf(userId));
+				libContent.setCreateTime(new Date());
+				libContent.setUpdater(Long.valueOf(userId));
+				libContent.setUpdateTime(new Date());
+				this.save(libContent);
+				builder.append(libContent.getContentId()+",");
+			});
+			result = builder.toString();
+		}else{
+			result = "文件格式不正确，请检查标题、正文字段是否为空";
+		}
+		return result;
+	}
+
+
+
+
+
+
