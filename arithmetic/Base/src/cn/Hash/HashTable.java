@@ -19,7 +19,7 @@ public class HashTable<K,V> extends Dictionary<K,V> implements Serializable{
 
     /**
      * The total number of entries in the hash table.
-     * count是Hashtable的大小，它是Hashtable保存的键值对的数量。
+     * count是Hashtable的大小，它是Hashtable保存的索引的数量。
      */
     private transient int count;
 
@@ -27,7 +27,7 @@ public class HashTable<K,V> extends Dictionary<K,V> implements Serializable{
      * The table is rehashed when its size exceeds this threshold.  (The
      * value of this field is (int)(capacity * loadFactor).)
      * threshold是Hashtable的阈值，用于判断是否需要调整Hashtable的容量。threshold的值="容量*加载因子"。
-     * 也就是哈希表中现有的元素数量
+     * 也就是哈希表中现有的索引数量
      * @serial
      */
     private int threshold;
@@ -266,7 +266,7 @@ public class HashTable<K,V> extends Dictionary<K,V> implements Serializable{
         Entry<?,?> [] newMap = new Entry<?,?>[newCapacity];
 
         modCount++;
-        //重新定义哈希表中的键的数量
+        //重新定义哈希表中的索引的数量
         threshold = (int)Math.min(newCapacity * loadFactor,MAX_ARRAY_SIZE+1);
 
         table = newMap;
@@ -343,7 +343,7 @@ public class HashTable<K,V> extends Dictionary<K,V> implements Serializable{
         //判断哈希表的容量是否达到阀值
         //如果达到阀值需要扩容，再重新插入数据，如果没有达到阀值则不需要扩容直接插入数据
         if(count > threshold){
-            //扩容
+            //扩容:把哈希表的容量和单向链表的容量同时扩容
             rehash();
             tab = table;
             hash = key.hashCode();
