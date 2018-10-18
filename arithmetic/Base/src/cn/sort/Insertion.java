@@ -20,7 +20,7 @@ package cn.sort;
 public class Insertion {
     public static void main(String [] args){
         int[] array = new int[]{21,1,3,0,2,4,5,6,10,7,8};
-        sort2(array);
+        sort(array);
     }
 
     public static void sort(int [] array){

@@ -1,0 +1,10 @@
+#服务端口号
+server:
+  port: 2010
+
+#服务者名称
+spring:
+  application:
+    name: demo1
+
+
