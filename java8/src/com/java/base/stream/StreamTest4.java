@@ -23,6 +23,14 @@ public class StreamTest4 {
             return x.startsWith("A");
         }));
 
+        Stream.of("30").map((x-> {
+            if ((Integer.valueOf(x)%3) == 0){
+                return 30;
+            }else{
+                return 0;
+            }
+        }));
+
 //        map:d2
 //        anyMatch: D2
 //        map:a2
