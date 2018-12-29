@@ -28,7 +28,7 @@ public class BinarySearch {
         int high = n-1;
 
         while(low <= high){
-            int mid = (low + high)/2;
+            int mid = low+((high-low)>>1);
             if(array[mid] == value){
                 return mid;
             }else if(array[mid] < value){

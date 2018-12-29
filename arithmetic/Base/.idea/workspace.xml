@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="03ae2b80-5be8-4a73-a0eb-efabdfa1bd3c" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/src/cn/Search/BinarySearch.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cn/Search/BinarySearch.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cn/Search/BinarySearch.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -67,8 +66,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/cn/Search/BinarySearch.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="115">
-              <caret line="5" column="7" selection-start-line="5" selection-start-column="7" selection-end-line="5" selection-end-column="7" />
+            <state relative-caret-position="144">
+              <caret line="30" column="41" selection-start-line="30" selection-start-column="41" selection-end-line="30" selection-end-column="41" />
             </state>
           </provider>
         </entry>
@@ -266,7 +265,7 @@
     <property name="SearchEverywhereHistoryKey" value="HashMap&#9;FILE&#9;jar://D:/jdk1.8/src.zip!/java/util/HashMap.java&#10;concur&#9;PSI&#9;JAVA://java.util.concurrent.ConcurrentHashMap&#10;ha&#9;PSI&#9;JAVA://cn.Hash.HashMap#hash&#10;HashT&#9;FILE&#9;jar://D:/jdk1.8/src.zip!/java/util/Hashtable.java&#10;HashTa&#9;FILE&#9;jar://D:/jdk1.8/src.zip!/java/util/Hashtable.java&#10;Hash&#9;PSI&#9;JAVA://cn.Hash.HashTable" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1546069617744" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1546076260765" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.0" />
@@ -630,12 +629,12 @@
       <workItem from="1544005188145" duration="1179000" />
       <workItem from="1544510176490" duration="46000" />
       <workItem from="1545113767217" duration="374000" />
-      <workItem from="1546068320569" duration="1291000" />
+      <workItem from="1546068320569" duration="2121000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="593846000" />
+    <option name="totallyTimeSpent" value="594676000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -662,7 +661,7 @@
       <window_info anchor="bottom" id="Docker" show_stripe_button="false" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.40752864" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.40752864" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.48039216" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -1078,8 +1077,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/cn/Search/BinarySearch.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="115">
-          <caret line="5" column="7" selection-start-line="5" selection-start-column="7" selection-end-line="5" selection-end-column="7" />
+        <state relative-caret-position="144">
+          <caret line="30" column="41" selection-start-line="30" selection-start-column="41" selection-end-line="30" selection-end-column="41" />
         </state>
       </provider>
     </entry>
