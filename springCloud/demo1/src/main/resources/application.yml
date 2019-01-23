@@ -1,10 +1,17 @@
-#·şÎñ¶Ë¿ÚºÅ
+#æœåŠ¡çš„ç«¯å£å·
 server:
   port: 2010
 
-#·şÎñÕßÃû³Æ
+#æœåŠ¡çš„åç§°
 spring:
   application:
     name: demo1
-
-
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    pool:
+      max-active: 1000
+      max-wait: -1
+      max-idle: 1
+    database: 1
+    timeout: 2000

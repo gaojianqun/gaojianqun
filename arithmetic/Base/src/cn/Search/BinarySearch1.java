@@ -3,10 +3,10 @@ package cn.Search;
 
 /**
  * Created by gaojianqun on 2018/12/29.
- * 二分查找
+ * 二分查找（非递归查找）
  * 随机一个数组 0 到 99 之间的数字，查询23在数组中的位置
  */
-public class BinarySearch {
+public class BinarySearch1 {
 
     public static void main(String [] args){
         int [] array = new int[]{1,2,3,4,5,6,7,8,9,10,
