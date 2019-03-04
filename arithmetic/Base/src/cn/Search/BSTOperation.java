@@ -34,7 +34,7 @@ public class BSTOperation <Key extends Comparable<Key>,Value>{
             }
         }
 
-        //从根节点开始往下查找为k的键
+        //从根节点开始往下查找第k个节点的键
         public Key select(int k){
             return select(root,k).key;
         }
