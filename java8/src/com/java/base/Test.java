@@ -2,6 +2,8 @@ package com.java.base;
 
 import com.java.User;
 
+import java.util.Date;
+
 public class Test {
 
     public static void main(String [] args){
@@ -12,6 +14,8 @@ public class Test {
         Integer age = user.getAge() + 1;
         user.setAge(age);
         System.out.println(user.getAge());
+
+        System.out.println(new Date().getTime());
     }
 
 }
