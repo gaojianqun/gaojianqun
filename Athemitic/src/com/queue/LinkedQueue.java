@@ -29,7 +29,7 @@ public class LinkedQueue {
         return true;
     }
 
-    //队列中删除元素:一个一个删除元素
+    //队列中弹出元素:一个一个弹出元素
     public Object dequeue(){
         if(head != null){
             Object object = head.object;
