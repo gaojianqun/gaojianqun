@@ -22,6 +22,19 @@ public class Main {
         for(int i = 0;i< 10 ;i++){
             System.out.print(queue.dequeue() + " ");
         }
+
+        System.out.println();
+
+        LinkedQueue linkedQueue = new LinkedQueue();
+        linkedQueue.enqueue("I");
+        linkedQueue.enqueue("am");
+        linkedQueue.enqueue("a");
+        linkedQueue.enqueue("天才");
+
+        for(int i = 0;i< 10 ;i++){
+            System.out.print(linkedQueue.dequeue() + " ");
+        }
+
     }
 
 }

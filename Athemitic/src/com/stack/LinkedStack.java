@@ -3,7 +3,7 @@ package com.stack;
 public class LinkedStack {
 
     //栈中的节点元素
-    private Node node;
+    private Node head;
     //栈中的元素数量
     private int count;
 
@@ -20,8 +20,8 @@ public class LinkedStack {
     //压栈
     public boolean push(Object object){
         Node n = new Node(object);
-        n.next = node;
-        node = n;
+        n.next = head;
+        head = n;
         ++count;
         return true;
     }
@@ -31,8 +31,8 @@ public class LinkedStack {
         if(count == 0){
             return null;
         }
-        Object object = node.object;
-        node = node.next;
+        Object object = head.object;
+        head = head.next;
         --count;
         return object;
     }
