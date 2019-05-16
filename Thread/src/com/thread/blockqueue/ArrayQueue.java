@@ -16,8 +16,8 @@ public class ArrayQueue {
     private int tail;
 
     public ArrayQueue(int size){
-        this.size = size;
-        this.objects = new Object[size];
+       this.size = size;
+       this.objects = new Object[size];
     }
 
     public int getSize() {

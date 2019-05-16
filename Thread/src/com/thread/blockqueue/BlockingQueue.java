@@ -1,7 +1,5 @@
 package com.thread.blockqueue;
 
-import java.util.LinkedList;
-
 /**
  * Created by gaojianqun on 2018/12/16.
  */
@@ -26,6 +24,7 @@ public class BlockingQueue {
                e.printStackTrace();
            }
        }
+       //真正的实现未必是0，只要有空余空间就可以添加
        if(queue.getSize() == 0){
            notifyAll();
        }
@@ -42,6 +41,7 @@ public class BlockingQueue {
                e.printStackTrace();
            }
        }
+       //这个也未必是一定要在队列中的元素已满的情况下再删除
        if(queue.getSize() == this.limit){
            notifyAll();
        }
