@@ -3,6 +3,7 @@ package com.stack;
 public class ArrayStack {
     //栈中的节点元素
     private Object[] object;
+
     //栈中的元素数量
     private int count;
     //栈的大小

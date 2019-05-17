@@ -20,8 +20,11 @@ public class LinkedStack {
     //压栈
     public boolean push(Object object){
         Node n = new Node(object);
+        //n的下一个节点变成了head
         n.next = head;
+        //原来的head节点变成了n
         head = n;
+
         ++count;
         return true;
     }
