@@ -3,6 +3,7 @@ package cn.sort;
 /**
  * Created by gaojianqun on 2018/3/27.
  * 时间复杂度为O(nlogn)
+ * 6,1,2,7,9,3,4,5,10,8
  * 第一趟排序
  * 5 1 2 7 9 3 4 6 10 8
  * 5 1 2 6 9 3 4 7 10 8

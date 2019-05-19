@@ -163,14 +163,14 @@ public class BST<Key extends Comparable<Key>,Value>{
 
     //删除某一节点，将该节点的后继放入到此节点的位置上即可
     public void deleteMin(){
-        root = deleteMin(root);
+        root = getRightMin(root);
     }
 
     //永远把最小节点的右节点筛选出来
-    private Node deleteMin(Node node){
+    private Node getRightMin(Node node){
         if(node.left == null)
             return node.right;
-        node.left = deleteMin(node.left);
+        node.left = getRightMin(node.left);
         node.N = size(node.left) + size(node.right) + 1;
         return node;
     }
@@ -203,7 +203,7 @@ public class BST<Key extends Comparable<Key>,Value>{
             //如果有两个子节点就势必要把该节点临近的最小右节点拿出来
             node = min(t.right);
             //封装新父节点的右节点
-            node.right = deleteMin(t.right);
+            node.right = getRightMin(t.right);
             //封装新父节点的左节点
             node.left = t.left;
         }
