@@ -1,4 +1,5 @@
 package com.exercise.test01;
+
 /**
  * 题目描述：
  *  给出两个 非空 的链表用来表示两个非负的整数。其中，它们各自的位数是按照 逆序 的方式存储的，并且它们的每个节点只能存储 一位 数字。
@@ -11,26 +12,25 @@ package com.exercise.test01;
  */
 public class ListNode {
 
-    private Node head;//链表的头指针
+    ListNode head;//头指针
 
-    private int N;//链表的长度
+    int N;//链表的长度
 
-    class Node{
-        int val;
-        Node next;
+    int val;//节点的值
 
-        public Node(int val){
-            this.val = val;
-        }
+    ListNode next;//下一指针
 
-        public Node(int val,Node next){
-            this.val = val;
-            this.next = next;
-        }
+    public ListNode(int val,ListNode next){
+        this.val = val;
+        this.next = next;
+    }
+
+    public ListNode(int N){
+        this.N = N;
     }
 
     public void put(int val){
-        Node node = new Node(val);
+        ListNode node = new ListNode(val,null);
         if(head == null){
             head = node;
         }else{
@@ -41,11 +41,11 @@ public class ListNode {
     }
 
     //在链表头部删除节点
-    public Node pop(){
+    public ListNode pop(){
         if(head == null){
             return head;
         }else{
-            Node node = head;
+            ListNode node = head;
             head = node.next;
             N--;
             return node;
