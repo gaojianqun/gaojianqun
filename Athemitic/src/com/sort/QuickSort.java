@@ -11,6 +11,12 @@ public class QuickSort {
             System.out.print(array[i]+" ");
         }
 
+        final String str1 = new String("abc");
+        final String str = "abc";
+
+        System.out.println(str);
+        System.out.println(str1);
+
     }
 
     public static void sort(int[] array,int low,int high){
