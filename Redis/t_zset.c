@@ -139,31 +139,43 @@ zskiplistNode *zslInsert(zskiplist *zsl, double score, sds ele) {
     for (i = zsl->level-1; i >= 0; i--) {
         /* store rank that is crossed to reach the insert position */
         rank[i] = i == (zsl->level-1) ? 0 : rank[i+1];
+        //查找到该元素应该插入到哪个位置
         while (x->level[i].forward &&
                 (x->level[i].forward->score < score ||
                     (x->level[i].forward->score == score &&
                     sdscmp(x->level[i].forward->ele,ele) < 0)))
         {
+            //根据span也就是跨度，将小于要插入score的元素的跨度逐步累加，直到该元素应该有的位置
             rank[i] += x->level[i].span;
+            //获取该位置的前置指针
             x = x->level[i].forward;
         }
+        //将元素放入到update[i]中
         update[i] = x;
     }
     /* we assume the element is not already inside, since we allow duplicated
      * scores, reinserting the same element should never happen since the
      * caller of zslInsert() should test in the hash table if the element is
      * already inside or not. */
+    //一刀切，每次生成level的时候都用一个随机算法随机生成一个level
+    //为什么这么做？我们要想每层的跳跃都非常高效，那就越是平衡越好（第一层1级跳，第二层2级跳，第3层4级跳，第4层8级跳）。
+    //但是用算法实现起来，确实非常地复杂的，并且要严格地按照2地指数次幂，我们还要对原有地结构进行调整。
+    //所以跳表的思路是抛硬币，听天由命，产生一个随机数。
     level = zslRandomLevel();
     if (level > zsl->level) {
         for (i = zsl->level; i < level; i++) {
             rank[i] = 0;
             update[i] = zsl->header;
+            //最难受的理解，也是最不可思议的地方，原来redis在跳表中处理如此暴力：
+            //如果生成的随机level大于原有的跳表level，那么就直接将每个节点的跨度放置为原有跳表的最大长度
+            //那么随之带来的问题就是会非常浪费内存，但是好处就是可存储的数据将会很多
             update[i]->level[i].span = zsl->length;
         }
         zsl->level = level;
     }
     x = zslCreateNode(level,score,ele);
     for (i = 0; i < level; i++) {
+        //因为zskiplistNode存储的是level[]数组，所以要逐层开始更新forward指针
         x->level[i].forward = update[i]->level[i].forward;
         update[i]->level[i].forward = x;
 
