@@ -187,8 +187,10 @@ zskiplistNode *zslInsert(zskiplist *zsl, double score, sds ele) {
         //（1）如果此时的level大于原来的level,比如原来的跳表最大层级是20，此时的level是50，那么在20～50这些层级的rank[i]是0，而小于20级以下的rank[i]为原来的值；
         //（2）如果此时的level小于等于原来的level，那么rank[i]还为原来的值；
         //那么此时详细解答level[i].span - (rank[0] - rank[i])：
-        //在小于原来的20级之前的span进行了“细化”：span = span - (rank[0] - rank[i])；而大于原来20级的这一部分：span = span - (rank[0] - 0);
+        //在小于原来的20级之前的span：span = level[i].span - (rank[0] - rank[i])：rank[0] - rank[i]就是原来的span，那么等价代换span - span = 0,也就是原来的span并没有发生变化；
+        //而大于原来20级的这一部分：span = level[i].span - (rank[0] - 0)，level[i].span是原来跳表的总节点数 - rank[0]恰好就是原来的每一级的跨度;
         x->level[i].span = update[i]->level[i].span - (rank[0] - rank[i]);
+        //进行了第二次更新，将每一级中的跨度再进行加1
         update[i]->level[i].span = (rank[0] - rank[i]) + 1;
     }
 
