@@ -169,8 +169,7 @@ zskiplistNode *zslInsert(zskiplist *zsl, double score, sds ele) {
             update[i] = zsl->header;
             //最难受的理解，也是最不可思议的地方，原来redis在跳表中处理如此暴力：
             //如果生成的随机level大于原有的跳表level，那么就直接将每个节点的跨度放置为原有跳表的最大长度
-            //比如说，原来的跳表最大层级是20，此时的level是50，那么在20～50这些层级，每一层的跨度都是原有的跳表长度；
-            //那么随之带来的问题就是会非常浪费内存，但是好处就是可存储的数据将会很多？
+            //比如说，原来的跳表最大层级是20，此时的level是50，那么在20～50这些层级，每一层的跨度都是原有的跳表长度：是为了下面的跨度计算
             update[i]->level[i].span = zsl->length;
         }
         zsl->level = level;
