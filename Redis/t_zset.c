@@ -94,9 +94,7 @@ zskiplist *zslCreate(void) {
     return zsl;
 }
 
-/* Free the specified skiplist node. The referenced SDS string representation
- * of the element is freed too, unless node->ele is set to NULL before calling
- * this function. */
+/* 释放指定的skiplist节点。元素的引用的SDS字符串表示*也会被释放，除非在调用*这个函数之前将node->ele设置为NULL。 */
 void zslFreeNode(zskiplistNode *node) {
     sdsfree(node->ele);
     zfree(node);
@@ -115,10 +113,9 @@ void zslFree(zskiplist *zsl) {
     zfree(zsl);
 }
 
-/* Returns a random level for the new skiplist node we are going to create.
- * The return value of this function is between 1 and ZSKIPLIST_MAXLEVEL
- * (both inclusive), with a powerlaw-alike distribution where higher
- * levels are less likely to be returned. */
+/* 为我们将要创建的新skiplist节点返回一个随机级别。
+ * 该函数的返回值在1和ZSKIPLIST MAXLEVEL 之间(包括两者)，
+ * 具有类似于powerlaw（幂律分布）的分布，较高的级别不太可能返回。 */
 int zslRandomLevel(void) {
     int level = 1;
     while ((random()&0xFFFF) < (ZSKIPLIST_P * 0xFFFF))
@@ -164,11 +161,14 @@ zskiplistNode *zslInsert(zskiplist *zsl, double score, sds ele) {
     level = zslRandomLevel();
     if (level > zsl->level) {
         for (i = zsl->level; i < level; i++) {
+            //每一个rank[i]都置为0：大于之前的跳表最大的层到现在level的中间数量
+            //比如说，原来的跳表最大层级是20，此时的level是50，那么只有20～50这一段做以下操作：
             rank[i] = 0;
             update[i] = zsl->header;
             //最难受的理解，也是最不可思议的地方，原来redis在跳表中处理如此暴力：
             //如果生成的随机level大于原有的跳表level，那么就直接将每个节点的跨度放置为原有跳表的最大长度
-            //那么随之带来的问题就是会非常浪费内存，但是好处就是可存储的数据将会很多
+            //比如说，原来的跳表最大层级是20，此时的level是50，那么在20～50这些层级，每一层的跨度都是原有的跳表长度；
+            //那么随之带来的问题就是会非常浪费内存，但是好处就是可存储的数据将会很多？
             update[i]->level[i].span = zsl->length;
         }
         zsl->level = level;
@@ -176,10 +176,13 @@ zskiplistNode *zslInsert(zskiplist *zsl, double score, sds ele) {
     x = zslCreateNode(level,score,ele);
     for (i = 0; i < level; i++) {
         //因为zskiplistNode存储的是level[]数组，所以要逐层开始更新forward指针
+        //将新增的x节点插入到每一层的update[i]（update[i]指的是每一层级中每个节点）后面；
         x->level[i].forward = update[i]->level[i].forward;
         update[i]->level[i].forward = x;
 
-        /* update span covered by update[i] as x is inserted here */
+        /* 随着x被插入在这里，用update[i]的跨度来覆盖原来的跨度 */
+        //前提：原来的跳表最大层级是20，此时的level是50，那么在20～50这些层级的rank[i]是原来的跳表长度：n，而小于20级以下的rank[i]为0；
+        //（1）更新新插入节点x每一层的跨度；（2）更新原有节点的跨度；
         x->level[i].span = update[i]->level[i].span - (rank[0] - rank[i]);
         update[i]->level[i].span = (rank[0] - rank[i]) + 1;
     }
@@ -189,11 +192,13 @@ zskiplistNode *zslInsert(zskiplist *zsl, double score, sds ele) {
         update[i]->level[i].span++;
     }
 
+    // 调整新节点的前驱指针
     x->backward = (update[0] == zsl->header) ? NULL : update[0];
     if (x->level[0].forward)
         x->level[0].forward->backward = x;
     else
         zsl->tail = x;
+    // 调整 skiplist 的长度
     zsl->length++;
     return x;
 }
