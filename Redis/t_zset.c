@@ -135,6 +135,7 @@ zskiplistNode *zslInsert(zskiplist *zsl, double score, sds ele) {
     x = zsl->header;
     for (i = zsl->level-1; i >= 0; i--) {
         /* store rank that is crossed to reach the insert position */
+        //把每一个rank[i]替换为rank[i+1]
         rank[i] = i == (zsl->level-1) ? 0 : rank[i+1];
         //查找到该元素应该插入到哪个位置
         while (x->level[i].forward &&
@@ -143,6 +144,7 @@ zskiplistNode *zslInsert(zskiplist *zsl, double score, sds ele) {
                     sdscmp(x->level[i].forward->ele,ele) < 0)))
         {
             //根据span也就是跨度，将小于要插入score的元素的跨度逐步累加，直到该元素应该有的位置
+            //rank[i]是前面几级的跨度加和,rank[0]是“最后一级（第0级：也就是最底层的链表）的最后一个元素的排名”
             rank[i] += x->level[i].span;
             //获取该位置的前置指针
             x = x->level[i].forward;
@@ -180,9 +182,12 @@ zskiplistNode *zslInsert(zskiplist *zsl, double score, sds ele) {
         x->level[i].forward = update[i]->level[i].forward;
         update[i]->level[i].forward = x;
 
-        /* 随着x被插入在这里，用update[i]的跨度来覆盖原来的跨度 */
-        //前提：原来的跳表最大层级是20，此时的level是50，那么在20～50这些层级的rank[i]是原来的跳表长度：n，而小于20级以下的rank[i]为0；
-        //（1）更新新插入节点x每一层的跨度；（2）更新原有节点的跨度；
+        /* 随着x被插入在这里，用update[i]的跨度来覆盖原来的跨度 ：//（1）更新新插入节点x每一层的跨度；（2）更新原有节点的跨度；*/
+        //前提：rank[0]是“最后一级（第0级：也就是最底层的链表）的最后一个元素的排名”
+        //（1）如果此时的level大于原来的level,比如原来的跳表最大层级是20，此时的level是50，那么在20～50这些层级的rank[i]是0，而小于20级以下的rank[i]为原来的值；
+        //（2）如果此时的level小于等于原来的level，那么rank[i]还为原来的值；
+        //那么此时详细解答level[i].span - (rank[0] - rank[i])：
+        //在小于原来的20级之前的span进行了“细化”：span = span - (rank[0] - rank[i])；而大于原来20级的这一部分：span = span - (rank[0] - 0);
         x->level[i].span = update[i]->level[i].span - (rank[0] - rank[i]);
         update[i]->level[i].span = (rank[0] - rank[i]) + 1;
     }
