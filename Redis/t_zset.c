@@ -149,7 +149,7 @@ zskiplistNode *zslInsert(zskiplist *zsl, double score, sds ele) {
             //获取该位置的前置指针
             x = x->level[i].forward;
         }
-        //将元素放入到update[i]中
+        //将指向要插入元素的前置指针复制给update[i]
         update[i] = x;
     }
     /* we assume the element is not already inside, since we allow duplicated
