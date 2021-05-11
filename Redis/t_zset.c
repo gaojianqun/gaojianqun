@@ -176,7 +176,7 @@ zskiplistNode *zslInsert(zskiplist *zsl, double score, sds ele) {
     }
     x = zslCreateNode(level,score,ele);
     for (i = 0; i < level; i++) {
-        //因为zskiplistNode存储的是level[]数组，所以要逐层开始更新forward指针
+        //因为zskiplistNode存储的是level[]数组，所以要逐层开始更新新加入节点x的所有每一层的forward指针
         //将新增的x节点插入到每一层的update[i]（update[i]指的是每一层级中每个节点）后面；
         x->level[i].forward = update[i]->level[i].forward;
         update[i]->level[i].forward = x;
